@@ -1,8 +1,11 @@
+import json
 import discord
-import random
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='$')
+with open('config.json') as f:
+    config = json.load(f)
+
+client = commands.Bot(command_prefix=config['prefix'])
 
 client.load_extension("cogs.TicTacCog")
 
@@ -20,4 +23,4 @@ async def who(ctx):
     embedVar.add_field(name="Code written by:", value="Elijah Tungul", inline=True)
     await ctx.send(embed=embedVar)
 
-client.run("Nzg4OTU0Mjk1NzMwODMxMzgw.X9rA8g.KSj5Ub-8NIP-kfxHZZM5JeMVAwk")
+client.run(config['token'])
