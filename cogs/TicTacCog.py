@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 
 class TicTacToe(commands.Cog):
@@ -5,7 +6,8 @@ class TicTacToe(commands.Cog):
         self.bot = bot
         self.turn = 1
         self.piece = "X"
-        self.spaces = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        self.spaces = [' '] * 9
+        self.players = []
 
     async def display(self, message):
         await message.channel.send("```\n" + self.spaces[0] + "|" + self.spaces[1] + "|" + self.spaces[2] + "\n"
@@ -32,7 +34,7 @@ class TicTacToe(commands.Cog):
 
         self.turn = 1
         self.piece = "X"
-        self.spaces = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        self.spaces = [' '] * 9
 
         await message.channel.send("Welcome to Tic-Tac-Toe!")
 
@@ -100,6 +102,20 @@ class TicTacToe(commands.Cog):
             await message.channel.send(self.spaces[2] + " wins!")
             await self.display(message)
             return 1
+
+    @commands.command()
+    async def challenge(self, ctx, opponent: discord.User):
+        if ctx.author == opponent:
+            await ctx.send("You cannot challenge yourself!")
+        elif opponent.bot:
+            await ctx.send("You cannot challenge a Discord bot!")
+        else:
+            user1 = "<@" + str(ctx.author.id) + ">"
+            user2 = "<@" + str(opponent.id) + ">"
+
+            await ctx.send(user1 + " has challenged " + user2 + " to a game of Tic-Tac-Toe!")
+
+            self.players = [ctx.author.id, opponent.id]
 
 def setup(bot):
     bot.add_cog(TicTacToe(bot))

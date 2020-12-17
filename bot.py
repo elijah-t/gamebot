@@ -10,7 +10,6 @@ client.load_extension("cogs.TicTacCog")
 async def on_ready():
     print('{0.user} is online.'.format(client))
 
-
 @client.command()
 async def ping(ctx):
     await ctx.send(f'{round(client.latency * 1000)}ms')
