@@ -19,8 +19,11 @@ async def ping(ctx):
 
 @client.command()
 async def who(ctx):
-    embedVar = discord.Embed(title="Game Bot", description="A discord bot that plays simple games.", color=0x00ff00)
-    embedVar.add_field(name="Code written by:", value="Elijah Tungul", inline=True)
-    await ctx.send(embed=embedVar)
+    embed=discord.Embed(title="Game Bot", url="https://github.com/elijah-t/gamebot", description="A discord bot that plays simple games.", color=0x736dd0)
+    embed.set_thumbnail(url="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/259/video-game_1f3ae.png")
+    embed.add_field(name="Written in:", value="Python", inline=True)
+    embed.add_field(name="Code by:", value="Elijah Tungul", inline=True)
+    embed.set_footer(text="If you found this, you're cool :)")
+    await ctx.send(embed=embed)
 
 client.run(config['token'])
