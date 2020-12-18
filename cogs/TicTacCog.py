@@ -9,6 +9,8 @@ class TicTacToe(commands.Cog):
         self.spaces = [' '] * 9
         self.players = []
 
+    #display(self, message)
+    #Displays the current state of the board
     async def display(self, message):
         await message.channel.send("```\n" + self.spaces[0] + "|" + self.spaces[1] + "|" + self.spaces[2] + "\n"
                                    + "-+-+-" + "\n" +
@@ -16,6 +18,8 @@ class TicTacToe(commands.Cog):
                                    + "-+-+-" + "\n" +
                                    self.spaces[6] + "|" + self.spaces[7] + "|" + self.spaces[8] + "```")
 
+    #update(self, message, placement, piece)
+    #Updates the board if the placement is between 0-8 and the space is not already filled
     async def update(self, message, placement, piece):
         if(not (0 <= placement and placement <= 8)):
             await message.channel.send("Invalid placement! Please enter in a valid placement: ")
@@ -29,6 +33,8 @@ class TicTacToe(commands.Cog):
             self.spaces[placement] = piece
             return True
 
+    #run(self, message)
+    #Runs the game of Tic-Tac-Toe
     @commands.command()
     async def run(self, message):
 
@@ -68,7 +74,9 @@ class TicTacToe(commands.Cog):
 
             if(await self.checkWinner(message)):
                 return
-
+ 
+    #checkWinner(self, message)
+    #Checks the winner of the game based on the pieces on the board
     async def checkWinner(self, message):
         if (self.spaces[0] == self.spaces[1] == self.spaces[2] != " "):
             await message.channel.send(self.spaces[0] + " wins!")
@@ -103,6 +111,8 @@ class TicTacToe(commands.Cog):
             await self.display(message)
             return 1
 
+    #challenge(self, ctx, opponent)
+    #Challenges another user to a game of Tic-Tac-Toe
     @commands.command()
     async def challenge(self, ctx, opponent: discord.User):
         if ctx.author == opponent:

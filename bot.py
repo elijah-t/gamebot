@@ -9,14 +9,20 @@ client = commands.Bot(command_prefix=config['prefix'])
 
 client.load_extension("cogs.TicTacCog")
 
+#on_ready()
+#Prints a message when the bot is ready to use.
 @client.event
 async def on_ready():
     print('{0.user} is online.'.format(client))
 
+#ping(ctx)
+#Sends the ping between the bot and the server.
 @client.command()
 async def ping(ctx):
     await ctx.send(f'{round(client.latency * 1000)}ms')
 
+#who(ctx)
+#Sends an embed about the game bot itself, and the creator.
 @client.command()
 async def who(ctx):
     embed=discord.Embed(title="Game Bot", url="https://github.com/elijah-t/gamebot", description="A discord bot that plays simple games.", color=0x736dd0)
