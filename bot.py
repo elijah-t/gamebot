@@ -5,7 +5,7 @@ from discord.ext import commands
 with open('config.json') as f:
     config = json.load(f)
 
-client = commands.Bot(command_prefix=config['prefix'])
+client = commands.Bot(command_prefix=config['prefix'], help_command=None)
 
 client.load_extension("cogs.TicTacCog")
 
@@ -35,7 +35,7 @@ async def who(ctx):
 #help(ctx)
 #Opens the help menu.
 @client.command()
-async def _help(ctx):
+async def help(ctx):
     embed=discord.Embed(title="Game Bot Commands", description="You can open this menu again by typing $help.", color=0x865085)
     embed.set_thumbnail(url="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/259/question-mark_2753.png")
     embed.add_field(name="$help", value="Opens the help menu.", inline=False)
