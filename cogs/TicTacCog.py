@@ -114,7 +114,7 @@ class TicTacToe(commands.Cog):
     #challenge(self, ctx, opponent)
     #Challenges another user to a game of Tic-Tac-Toe
     @commands.command()
-    async def challenge(self, ctx, opponent: discord.User):
+    async def tttchallenge(self, ctx, opponent: discord.User):
         if ctx.author == opponent:
             await ctx.send("You cannot challenge yourself!")
         elif opponent.bot:
